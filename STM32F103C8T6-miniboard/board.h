@@ -37,14 +37,21 @@
  * MCU type, supported types are defined in ./os/hal/platforms/hal_lld.h.
  */
 #define STM32F10X_MD
-//#define STM32F10X_HD
 /*
  * IO pins assignments.
+ */
+ /*
+ *PA0,PA1,PA2(USART2_TX),PA3(USART2_RX)
+ *PA4(SPI1_NSS),PA5(SPI1_SCK),PA6(SPI1_MISO),PA7(SPI1_MOSI)
+ *
+ *
+ *
  */
 #define GPIOA_BUTTON            0
 #define GPIOA_SPI1NSS           4
 
 #define GPIOB_SPI2NSS           12  // -> correct
+#define GPIOB_SPI2_RST					0
 /*
 #define GPIOC_USB_P             4
 #define GPIOC_MMCWP             6
@@ -57,7 +64,7 @@
 #define LED2										1
 #define LED3										2
 
-#define HAL_USE_SPI							TRUE
+//#define HAL_USE_SPI							FALSE
 
 /*
  * I/O ports initial setup, this configuration is established soon after reset

@@ -58,8 +58,24 @@ bool_t mmc_lld_is_write_protected(MMCDriver *mmcp) {
 }
 #endif
 
+	/* Maximum speed SPI configuration (18MHz, CPHA=0, CPOL=0, MSb first).*/
+//SPI_CR1_BR_0 - 18 mhz, BT_1=9Mhz
+static SPIConfig hs_spicfg = {NULL, IOPORT2, GPIOB_SPI2NSS, SPI_CR1_BR_1};
+
 /*
  * Board-specific initialization code.
  */
 void boardInit(void) {
+		 /*
+   * SPI1 I/O pins setup.
+   */
+  palSetPadMode(IOPORT2, 13, PAL_MODE_STM32_ALTERNATE_PUSHPULL);     /* SCK. */
+  palSetPadMode(IOPORT2, 14, PAL_MODE_STM32_ALTERNATE_PUSHPULL);     /* MISO.*/
+  palSetPadMode(IOPORT2, 15, PAL_MODE_STM32_ALTERNATE_PUSHPULL);     /* MOSI.*/
+  palSetPadMode(IOPORT2, GPIOB_SPI2NSS, PAL_MODE_OUTPUT_PUSHPULL);
+  palSetPad(IOPORT2, GPIOB_SPI2NSS);
+	
+	spiStart(&SPID2, &hs_spicfg);       /* Setup transfer parameters.       */
+  //  spiAcquireBus(&SPID2);              /* Acquire ownership of the bus.    */
+  //    palClearPad(IOPORT3, GPIOC_LED);    /* LED ON.                          */
 }

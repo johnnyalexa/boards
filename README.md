@@ -11,3 +11,12 @@ want to support a new board:
   
 # OLIMEX_STM32_P103
 Default board as template.
+
+#15/03/2015
+	- Switching to dev branch to work on tcp stack;
+
+
+
+
+
+#
